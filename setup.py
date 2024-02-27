@@ -9,5 +9,4 @@ setup(
             'gh-llm-loader=gh_llm_loader.cli:main',
         ],
     },
-    # Add other package dependencies as needed
 )

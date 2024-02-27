@@ -50,10 +50,3 @@ def compile_files_to_single_file(source_path, output_filename, ignored_folders=N
 
 
 
-# # Example usage
-# source_path = "."  # Adjust as needed
-# output_filename = "compiled_repository_code.txt"
-# ignored_folders = {'.git'}  # Add folders to ignore
-# ignored_files = {'compiled_repository_code.txt'}  # Add files to ignore
-
-# compile_files_to_single_file(source_path, output_filename, ignored_folders, ignored_files)
