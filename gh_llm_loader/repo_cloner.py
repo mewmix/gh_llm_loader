@@ -1,6 +1,6 @@
 import os
 import subprocess
-from handler import compile_files_to_single_file  # Ensure this is correctly imported
+from .handler import compile_files_to_single_file  # Ensure this is correctly imported
 
 def clone_and_prepare_repo(git_url, base_dir="./cloned_repos", ignored_folders=None, ignored_files=None):
     """
