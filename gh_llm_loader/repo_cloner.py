@@ -31,8 +31,8 @@ def clone_and_prepare_repo(git_url, base_dir="./cloned_repos", ignored_folders=N
     print(f"Repository cloned and data prepared at {os.path.join(base_dir, output_filename)}")
 
 # # Example usage
-# git_url = "https://github.com/mewmix/gh_llm_loader.git"  # URL of the GitHub repository
-# ignored_folders = {'.git'}  # Optionally specify folders to ignore
-# ignored_files = {''}  # Optionally specify files to ignore
+git_url = "https://github.com/mewmix/gh_llm_loader.git"  # URL of the GitHub repository
+ignored_folders = {'.git'}  # Optionally specify folders to ignore
+ignored_files = {''}  # Optionally specify files to ignore
 
-# clone_and_prepare_repo(git_url, ignored_folders=ignored_folders, ignored_files=ignored_files)
+clone_and_prepare_repo(git_url, ignored_folders=ignored_folders, ignored_files=ignored_files)
