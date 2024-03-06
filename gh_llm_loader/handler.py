@@ -1,14 +1,18 @@
 import os
 
-def generate_file_index(path, ignored_folders=None, ignored_files=None):
+def generate_file_index(path, ignored_folders=None, ignored_files=None, included_folders=None, file_filter=None):
     """
     Generates a nested dictionary representing the folder structure and files,
-    excluding specified folders and files.
+    excluding/including specified folders and files.
     """
     if ignored_folders is None:
         ignored_folders = set()
     if ignored_files is None:
         ignored_files = set()
+    if included_folders is None:
+        included_folders = set()
+    if file_filter is None:
+        file_filter = lambda f: True
 
     file_index = {}
     for root, dirs, files in os.walk(path):
@@ -18,20 +22,26 @@ def generate_file_index(path, ignored_folders=None, ignored_files=None):
         rel_path = os.path.relpath(root, path)
         rel_path = "" if rel_path == "." else rel_path
 
-        # Filter out ignored files and hidden files
-        file_list = [f for f in files if f not in ignored_files and not f.startswith('.')]
+        # Filter for included folders only
+        if included_folders:
+            if not any(folder in rel_path.split(os.sep) for folder in included_folders):
+                continue
+        # Filter out ignored files, hidden files and by passed filter if it was passed
+        file_list = [f for f in files if f not in ignored_files and not f.startswith('.') and file_filter(f)]
+
         if rel_path not in file_index:
             file_index[rel_path] = file_list
         else:
             file_index[rel_path].extend(file_list)
+
     return file_index
 
-def compile_files_to_single_file(source_path, output_filename, ignored_folders=None, ignored_files=None):
+def compile_files_to_single_file(source_path, output_filename, ignored_folders=None, ignored_files=None, included_folders=None, file_filter=None):
     """
     Compiles all code files into a single file, organized by filename, using UTF-8 encoding,
     excluding specified folders and files. Includes a header showing directory structure.
     """
-    file_index = generate_file_index(source_path, ignored_folders, ignored_files)
+    file_index = generate_file_index(source_path, ignored_folders, ignored_files, included_folders, file_filter)
     with open(output_filename, 'w', encoding='utf-8') as output_file:
         for dir_path, files in sorted(file_index.items()):
             if files:  # Only include directories in the header that contain files
