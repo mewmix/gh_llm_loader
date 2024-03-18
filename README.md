@@ -41,6 +41,28 @@ clone_and_prepare_repo(git_url, ignored_folders={'node_modules', '.git'}, ignore
 
 This function will clone the specified GitHub repository and prepare its data by compiling the files into a single file, excluding any folders or files specified.
 
+If you wish to simply curate a non github folder with the same methods the core function is available for import and use-
+
+```python
+import os
+from gh_llm_loader import compile_files_to_single_file
+
+# Specify the path to your project directory
+source_path = "/path/to/your/project"
+
+# Define the name for the output file
+output_filename = "project_compiled.txt"
+
+# Specify any folders or files you want to ignore during compilation
+ignored_folders = {'node_modules', '.git', 'build'}
+ignored_files = {'README.md', 'LICENSE'}
+
+# Compile the project files into a single file
+compile_files_to_single_file(source_path, output_filename, ignored_folders, ignored_files)
+
+print(f"Compilation complete. The output is saved in {output_filename}")
+```
+
 ### Command-Line Interface (CLI)
 
 For those preferring to use the command line:
@@ -50,6 +72,8 @@ gh-llm-loader --git-url https://github.com/yourusername/yourrepository.git --ign
 ```
 
 This command performs the same operation as the library usage example, cloning and preparing a repository for LLM ingestion.
+
+
 
 ## Contributing
 
