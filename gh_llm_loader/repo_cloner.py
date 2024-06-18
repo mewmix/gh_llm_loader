@@ -2,7 +2,7 @@ import os
 import subprocess
 from .handler import compile_files_to_single_file  # Ensure this is correctly imported
 
-def clone_and_prepare_repo(git_url, base_dir="./cloned_repos", ignored_folders=None, ignored_files=None):
+def clone_and_prepare_repo(git_url, base_dir="./cloned_repos", ignored_folders=None, ignored_files=None, included_folders=None, file_filter=None):
     """
     Clones a GitHub repository and prepares its data for ingestion by an LLM, with dynamic naming based on the repo.
     """
@@ -26,7 +26,7 @@ def clone_and_prepare_repo(git_url, base_dir="./cloned_repos", ignored_folders=N
         print(f"Repository already cloned at {local_dir}")
 
     # Compile the repository's contents
-    compile_files_to_single_file(local_dir, os.path.join(base_dir, output_filename), ignored_folders, ignored_files)
+    compile_files_to_single_file(local_dir, os.path.join(base_dir, output_filename), ignored_folders, ignored_files, included_folders, file_filter)
     
     print(f"Repository cloned and data prepared at {os.path.join(base_dir, output_filename)}")
 
