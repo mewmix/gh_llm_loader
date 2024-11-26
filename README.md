@@ -90,35 +90,42 @@ print(f"Compilation complete. The output is saved in {output_filename}")
 
 For those preferring to use the command line, here are some examples:
 
-a) Include only Python files:
+a) Only use local folders, not Github
+```sh
+gh-llm-loader --base-dir test 
+```
+
+
+b) Include only Python files (with github):
 ```sh
 gh-llm-loader --git-url https://github.com/psf/requests --file-filter "lambda f: f.endswith('.py')"
 ```
 
-b) Include only Markdown and text files:
+c) Include only Markdown and text files (with github):
 ```sh
 gh-llm-loader --git-url https://github.com/tensorflow/models --file-filter "lambda f: f.endswith('.md') or f.endswith('.txt')"
 ```
 
-c) Include only files with "test" in the filename:
+d) Include only files with "test" in the filename (with github):
 ```sh
 gh-llm-loader --git-url https://github.com/django/django --file-filter "lambda f: 'test' in f"
 ```
 
-d) Include only JavaScript files and the "package.json" file:
+e) Include only JavaScript files and the "package.json" file (with github):
 ```sh
 gh-llm-loader --git-url https://github.com/facebook/react --file-filter "lambda f: f.endswith('.js') or f == 'package.json'"
 ```
 
-e) Include only files in the "src" and "docs" folders:
+f) Include only files in the "src" and "docs" folders (with github):
 ```sh
 gh-llm-loader --git-url https://github.com/vuejs/vue --included-folders src docs
 ```
 
-f) Exclude the "tests" folder and include only Python files:
+g) Exclude the "tests" folder and include only Python files (with github):
 ```sh
 gh-llm-loader --git-url https://github.com/pallets/flask --ignored-folders tests --file-filter "lambda f: f.endswith('.py')"
 ```
+
 
 
 
